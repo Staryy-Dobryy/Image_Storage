@@ -1,0 +1,36 @@
+<div class="alert-bg content-center">
+  <div class="bg-white ph-3 pw-3 flex col">
+    <h1>Registration</h1>
+    <!-- TODO: registration form
+    <button class="btn-white">Join to Comunity</button>
+    -->
+  </div>
+</div>
+
+<div #top class="full-screan content-center border-0 col">
+  <nav class="navigation bg-yellow w-100 content-center-end pw-1">
+    <span (click)="scrollToElement('scope')" class="link-dark mh-1">Sbout</span>
+    <span (click)="scrollToElement('about')" class="link-dark mh-1">About</span>
+    <button class="btn-white-small ml-2">Login</button>
+    <button class="btn-white-small mh-1 mr-3">Registration</button>
+  </nav>
+  <p class="slide-name">Welcome to:</p>
+  <p inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">Image Storage</p>
+</div>
+<div #scope class="full-screan bg-blue content-center border-0 row text-blue" id="scope">
+  <div class="w-100 ph-3 mh-3">
+    <p inViewAnimation animationClassName="slide-in-left-anim" class="opacity-0 slide-name-strong">What was it created for?</p>
+    <p class="slide-info">Image storage is a web service for loading and saving images on the Internet. Also comment and admire the images of other users from around the world!</p>
+  </div>
+  <div class="w-100">
+    <img src="assets/tempimg.png">
+  </div>
+</div>
+<div #about class="full-screan bg-yellow content-center border-0 col" id="about">
+  <h1 inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">A little about the project</h1>
+  <h2></h2>
+</div>
+<div #bottom class="full-screan content-center border-0 col">
+  <h1 inViewAnimation animationClassName="slide-in-anim" class="opacity-0"></h1>
+  <h2></h2>
+</div>

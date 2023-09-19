@@ -1,0 +1,59 @@
+.slide-in-anim {
+  animation: 1s slidein;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.slide-in-left-anim {
+  animation: 1s slidein-left;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.slide-name-strong {
+  font-size: 54px;
+  font-weight: 600;
+}
+
+.slide-name {
+  font-size: 54px;
+}
+
+.slide-info{
+   font-size: 32px;
+}
+
+.navigation{
+    position: absolute;
+    top: 0;
+    height: 5dvh;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(1.5dvh);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+img {
+  width: 400px;
+  max-width: 40%;
+}
+
+@keyframes slidein-left {
+  from {
+    opacity: 0;
+    transform: translateX(2dvw);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
