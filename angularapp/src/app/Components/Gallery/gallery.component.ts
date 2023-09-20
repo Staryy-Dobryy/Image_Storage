@@ -6,6 +6,6 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css']
 })
-export class GeneralComponent {
+export class GalleryComponent {
 
 }

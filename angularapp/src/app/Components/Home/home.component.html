@@ -1,18 +1,63 @@
-<div class="alert-bg content-center">
-  <div class="bg-white ph-3 pw-3 flex col">
-    <h1>Registration</h1>
-    <!-- TODO: registration form
-    <button class="btn-white">Join to Comunity</button>
-    -->
+<!--Google auth fail alert-->
+<div *ngIf="googleAuthFailAlert" class="content-center full-screan">
+  <div class="alert-bg" (click)="googleAuthFailAlert = false"></div>
+  <div class="alert bg-white ph-3 pw-3 flex col w-25">
+    <h1 class="mw-3">Oo-oopss... Authorization failed.</h1>
   </div>
 </div>
+<!--Google auth fail alert end-->
+
+<!--Login form-->
+<div *ngIf="loginFormOpened" class="content-center full-screan">
+  <div class="alert-bg" (click)="closeLoginForm()"></div>
+  <div class="alert bg-white ph-3 pw-3 flex col w-25">
+    <h1 class="mw-3">Login</h1>
+    <div class="content-center col">
+      <label class="form-group">
+        <span class="ml-1 mw-1">E-mail address</span>
+        <input type="email" class="text-input mb-1" placeholder="Enter your email">
+      </label>
+      <label class="form-group">
+        <span class="ml-1 mw-1">Password</span>
+        <input type="email" class="text-input mb-1" placeholder="Password">
+      </label>
+      <button class="btn-yellow w-100p">Login</button>
+      <h4 class="mw-2">or</h4>
+      <button type="button" class="login-with-google-btn btn-white w-100p mb-1" #loginRef>Sign in with Google</button>
+    </div>
+  </div>
+</div>
+<!--Login form end-->
+
+<!--Registration form-->
+<div *ngIf="registrationFormOpened" class="content-center full-screan">
+  <div class="alert-bg" (click)="closeRegistrationForm()"></div>
+  <div class="alert bg-white ph-3 pw-3 flex col w-25">
+    <h1 class="mw-3">Registration</h1>
+    <div class="content-center col">
+      <label class="form-group">
+        <span class="ml-1 mw-1">E-mail address</span>
+        <input type="email" class="text-input mb-1" placeholder="Enter your email">
+      </label>
+      <label class="form-group">
+        <span class="ml-1 mw-1">Password</span>
+        <input type="email" class="text-input mb-1" placeholder="Create password">
+      </label>
+      <button class="btn-yellow w-100p">Join to Comunity</button>
+      <h4 class="mw-2">or</h4>
+      <button type="button" class="login-with-google-btn btn-white w-100p mb-1" #loginRef>Sign in with Google</button>
+      <p class="mb-3">If you have an account - <span (click)="openLoginForm()" class="link-dark">Login</span></p>
+    </div>
+  </div>
+</div>
+<!--Registration form end-->
 
 <div #top class="full-screan content-center border-0 col">
   <nav class="navigation bg-yellow w-100 content-center-end pw-1">
-    <span (click)="scrollToElement('scope')" class="link-dark mh-1">Sbout</span>
+    <span (click)="scrollToElement('scope')" class="link-dark mh-1">Scope</span>
     <span (click)="scrollToElement('about')" class="link-dark mh-1">About</span>
-    <button class="btn-white-small ml-2">Login</button>
-    <button class="btn-white-small mh-1 mr-3">Registration</button>
+    <button (click)="openLoginForm()" class="btn-white-small ml-2">Login</button>
+    <button (click)="openRegistrationForm()" class="btn-white-small mh-1 mr-3">Registration</button>
   </nav>
   <p class="slide-name">Welcome to:</p>
   <p inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">Image Storage</p>
@@ -30,7 +75,27 @@
   <h1 inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">A little about the project</h1>
   <h2></h2>
 </div>
-<div #bottom class="full-screan content-center border-0 col">
-  <h1 inViewAnimation animationClassName="slide-in-anim" class="opacity-0"></h1>
-  <h2></h2>
+<div #bottom class="full-screan content-center border-0 row">
+  <div class="w-100 ph-3 mh-3">
+    <p inViewAnimation animationClassName="slide-in-left-anim" class="opacity-0 slide-name-strong">What was it created for?</p>
+  </div>
+  <div class="w-100">
+    <div class="bg-white ph-3 pw-3 flex col w-25">
+      <h1 class="mw-3">Registration</h1>
+      <div class="content-center col">
+        <label class="form-group">
+          <span class="ml-1 mw-1">E-mail address</span>
+          <input type="email" class="text-input mb-1" placeholder="Enter your email">
+        </label>
+        <label class="form-group">
+          <span class="ml-1 mw-1">Password</span>
+          <input type="email" class="text-input mb-1" placeholder="Create password">
+        </label>
+        <button class="btn-yellow w-100p">Join to Comunity</button>
+        <h4 class="mw-2">or</h4>
+        <button type="button" class="login-with-google-btn btn-white w-100p mb-1" #loginRef>Sign in with Google</button>
+        <p class="mb-3">If you have an account - <span (click)="openLoginForm()" class="link-dark">Login</span></p>
+      </div>
+    </div>
+  </div>
 </div>

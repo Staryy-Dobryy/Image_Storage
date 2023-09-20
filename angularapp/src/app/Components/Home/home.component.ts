@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +7,10 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  auth2: any;
+  @ViewChild('loginRef', { static: false }) loginElement!: ElementRef;
+  googleAuthFailAlert: boolean = false;
 
   @ViewChild("top", { static: false })
   target!: ElementRef | undefined;
@@ -22,10 +26,15 @@ export class HomeComponent {
 
   scrollAnimationTimer!: any;
   scrollAnimation: boolean = false;
+  scrollLock: boolean = false;
+
+  loginFormOpened: boolean = false;
+  registrationFormOpened: boolean = false;
 
   constructor(http: HttpClient) {
 
   }
+
   ngAfterViewInit() {
     this.scrollTargets = {
       0: this.target,
@@ -34,10 +43,52 @@ export class HomeComponent {
       3: this.bottom
     };
   }
-  @HostListener('window:wheel', ['$event']) onScrollEvent(event) {
-    console.log(this.scrollAnimation)
 
-    if (this.scrollAnimation == true) {
+  callLogin() {
+    console.log(this.loginElement)
+
+    this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
+      (googleAuthUser: any) => {
+
+        let profile = googleAuthUser.getBasicProfile();
+        console.log('Token || ' + googleAuthUser.getAuthResponse().id_token);
+        console.log('ID: ' + profile.getId());
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+
+      }, (error: any) => {
+        this.googleAuthFailAlert = true;
+        console.error(error);
+      });
+
+  }
+
+  googleAuthSDK() {
+    (<any>window)['googleSDKLoaded'] = () => {
+      (<any>window)['gapi'].load('auth2', () => {
+        this.auth2 = (<any>window)['gapi'].auth2.init({
+          client_id: '211767464764-fv5l0e8pqe5kvn5us9jb41ktgm2074i4.apps.googleusercontent.com',
+          plugin_name: 'login',
+          cookiepolicy: 'single_host_origin',
+          scope: 'profile email'
+        });
+        this.callLogin();
+      });
+    }
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement('script');
+      js.id = id;
+      js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
+      fjs?.parentNode?.insertBefore(js, fjs);
+    }(document, 'script', 'google-jssdk'));
+  }
+
+  @HostListener('window:wheel', ['$event']) onScrollEvent(event) {
+    if (this.scrollLock || this.scrollAnimation) {
       return;
     }
 
@@ -73,6 +124,31 @@ export class HomeComponent {
           break;
       }
     }
+  }
+
+
+  openLoginForm(): void {
+    this.registrationFormOpened = false;
+    this.loginFormOpened = true;
+    this.scrollLock = true;
+    this.googleAuthSDK();
+  }
+
+  closeLoginForm(): void {
+    this.loginFormOpened = false;
+    this.scrollLock = false;
+  }
+
+  openRegistrationForm(): void {
+    this.loginFormOpened = false;
+    this.registrationFormOpened = true;
+    this.scrollLock = true;
+    this.googleAuthSDK();
+  }
+
+  closeRegistrationForm(): void {
+    this.registrationFormOpened = false;
+    this.scrollLock = false;
   }
 
   private startAnimation(): void {
