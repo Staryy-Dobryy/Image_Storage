@@ -1,0 +1,8 @@
+.add-scroll{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.navigation{
+    position:fixed;
+    top: 0;
+}

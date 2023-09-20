@@ -8,9 +8,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/Home/home.component';
 import { InViewAnimationDirective } from './Directives/elemInVievAnim.directive';
 import { NotFoundComponent } from './Components/NotFound/not-found.component';
+import { GeneralComponent } from './Components/General/general.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'general', component: GeneralComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -18,6 +20,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
+    GeneralComponent,
     NotFoundComponent,
     InViewAnimationDirective
   ],
