@@ -89,3 +89,8 @@
 .comments::-webkit-scrollbar {
   width: 40px;
 }
+
+.publication{
+    position: fixed;
+    z-index: 6;
+}

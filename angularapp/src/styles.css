@@ -413,6 +413,10 @@ body {
   grid-gap: 1dvh 0;
 }
 
+.position-fixed{
+    position: fixed;
+}
+
 .flex-start {
   align-items: flex-start;
 }
