@@ -1,11 +1,16 @@
-var builder = WebApplication.CreateBuilder(args);
+using ImageStorage.Extentions;
+using Microsoft.Extensions.Configuration;
 
+var builder = WebApplication.CreateBuilder(args);
+IConfiguration configuration = builder.Configuration;
 
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.InjectServices();
+builder.Services.InjectDatabaseServices(configuration);
 
 var app = builder.Build();
 

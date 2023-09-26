@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ImageStorage.BLL\ImageStorage.BLL.csproj" />
+  </ItemGroup>
+
 </Project>
