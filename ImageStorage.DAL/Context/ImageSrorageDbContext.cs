@@ -1,12 +1,6 @@
 ﻿using ImageStorage.DAL.Entities;
 using ImageStorage.DAL.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ImageStorage.DAL.Context
 {
@@ -14,12 +8,16 @@ namespace ImageStorage.DAL.Context
     {
         public ImageSrorageDbContext() { }
 
-        public ImageSrorageDbContext(DbContextOptions options) : base(options) { }
+        public ImageSrorageDbContext(DbContextOptions options) : base(options) 
+        {
+            Database.EnsureCreated();
+        }
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Publication> Publications { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<View> Views { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +25,7 @@ namespace ImageStorage.DAL.Context
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new PublicationConfig());
             modelBuilder.ApplyConfiguration(new CommentConfig());
+            modelBuilder.ApplyConfiguration(new ViewConfig());
             base.OnModelCreating(modelBuilder);
         }
     }

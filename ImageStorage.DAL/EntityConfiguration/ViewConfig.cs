@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ImageStorage.DAL.EntityConfiguration
 {
-    public class UserConfig : IEntityTypeConfiguration<User>
+    public class ViewConfig : IEntityTypeConfiguration<View>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<View> builder)
         {
-            builder.HasIndex(x => new { x.Id, x.Email }).IsUnique();
+            builder.HasIndex(x => x.PublicationId);
         }
     }
 }
