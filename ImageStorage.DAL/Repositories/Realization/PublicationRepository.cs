@@ -30,6 +30,20 @@ namespace ImageStorage.DAL.Repositories.Realization
             return publication.Comments;
         }
 
+        public async Task<IEnumerable<Publication>> GetPopularPublicationsAsync(int take, int skip)
+        {
+            var average = await _dbContext.Set<Publication>()
+                .Where(x => x.IsPublic)
+                .AverageAsync(x => x.ViewsCount);
+
+            return _dbContext.Set<Publication>()
+                .Where(x => x.ViewsCount > average)
+                .OrderBy(x => x.ViewsCount)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+        }
+
         public async Task<Publication?> GetWithDetailsByIdAsync(Guid publicationId)
         {
             return await _dbContext.Set<Publication>()
