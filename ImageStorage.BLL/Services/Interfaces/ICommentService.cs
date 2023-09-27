@@ -8,5 +8,7 @@ namespace ImageStorage.BLL.Services.Interfaces
 {
     public interface ICommentService
     {
+        Task CreateCommentAsync();
+        Task DeleteCommentAsync(Guid id);
     }
 }
