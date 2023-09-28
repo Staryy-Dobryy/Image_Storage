@@ -8,5 +8,6 @@ namespace ImageStorage.BLL.Services.Interfaces
 {
     public interface IViewService
     {
+        Task CreateViewOnPublication(Guid publicationId, Guid userId);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImageStorage.DAL.Repositories.Interfaces
 {
-    internal interface IAccountRepository : IBaseRepository<Account>
+    public interface IAccountRepository : IBaseRepository<Account>
     {
     }
 }

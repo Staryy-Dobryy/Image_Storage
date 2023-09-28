@@ -17,7 +17,8 @@ namespace ImageStorage.DAL.EntityConfiguration
 
             builder
                 .HasOne(x => x.User)
-                .WithOne(x => x.Account);
+                .WithOne(x => x.Account)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
