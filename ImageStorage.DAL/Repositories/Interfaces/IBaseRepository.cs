@@ -11,7 +11,9 @@ namespace ImageStorage.DAL.Repositories.Interfaces
     {
         Task<TEntity?> GetByIdAsync(Guid id);
         Task AddAsync(TEntity entity);
+        Task<TEntity> AddAndReturn(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task DeleteAsync(Guid id);
     }
 }
+        

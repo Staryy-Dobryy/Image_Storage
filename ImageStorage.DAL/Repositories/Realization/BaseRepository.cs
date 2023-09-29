@@ -48,5 +48,14 @@ namespace ImageStorage.DAL.Repositories.Realization
             _dbContext.Set<TEntity>().Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<TEntity> AddAndReturn(TEntity entity)
+        {
+            var createdEntity = await _dbContext.Set<TEntity>().AddAsync(entity);
+
+            await _dbContext.SaveChangesAsync();
+
+            return createdEntity.Entity;
+        }
     }
 }

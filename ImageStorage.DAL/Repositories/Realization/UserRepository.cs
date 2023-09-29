@@ -21,5 +21,12 @@ namespace ImageStorage.DAL.Repositories.Realization
             return await _dbContext.Set<User>()
                 .FirstOrDefaultAsync(x => x.Email == email);
         }
+
+        public async Task<User?> GetByEmailWithDetailsAsync(string email)
+        {
+            return await _dbContext.Set<User>()
+                .Include(x => x.Account)
+                .FirstOrDefaultAsync(x => x.Email == email);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace ImageStorage.BLL.Services.Interfaces
     public interface IUserService
     {
         Task<string> CreateUserWithGoogleAuthAsync(CreateUserByGoogleAccountModel source);
+        // Create GoogleAuthService with GoogleAuthModel
     }
 }

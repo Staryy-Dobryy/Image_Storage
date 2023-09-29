@@ -10,5 +10,6 @@ namespace ImageStorage.DAL.Repositories.Interfaces
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<User?> GetByEmailAsync(string email);
+        Task<User?> GetByEmailWithDetailsAsync(string email);
     }
 }
