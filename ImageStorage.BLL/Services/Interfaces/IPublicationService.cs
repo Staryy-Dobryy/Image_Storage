@@ -1,4 +1,6 @@
-﻿using ImageStorage.BLL.Models.CreateModels;
+﻿using ImageStorage.BLL.Models;
+using ImageStorage.BLL.Models.CreateModels;
+using ImageStorage.BLL.Models.UpdateModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,8 @@ namespace ImageStorage.BLL.Services.Interfaces
 {
     public interface IPublicationService
     {
-        Task CreatePublicationAsync(CreatePublicationModel source);
-        Task DeketePublicationAsync(Guid id);
+        Task CreatePublicationAsync(CreatePublicationModel source, JwtUserModel jwtUser);
+        Task UpdatePublicationAsync(UpdatePublicationModel source);
+        Task DeletePublicationAsync(Guid id);
     }
 }

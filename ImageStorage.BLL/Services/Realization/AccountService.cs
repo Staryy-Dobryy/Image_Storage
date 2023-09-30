@@ -42,7 +42,7 @@ namespace ImageStorage.BLL.Services.Realization
 
             var entity = _mapper.Map<Account>(source);
 
-            var account = await _accountRepository.AddAndReturn(entity);
+            var account = await _accountRepository.AddAndReturnAsync(entity);
 
             var jwtUserModel = _mapper.Map<JwtUserModel>(account.User);
 

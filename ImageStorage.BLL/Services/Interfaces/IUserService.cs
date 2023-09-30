@@ -1,4 +1,6 @@
-﻿using ImageStorage.BLL.Models.CreateModels;
+﻿using ImageStorage.BLL.Models;
+using ImageStorage.BLL.Models.CreateModels;
+using ImageStorage.BLL.Models.UpdateModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,6 @@ namespace ImageStorage.BLL.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<string> CreateUserWithGoogleAuthAsync(CreateUserByGoogleAccountModel source);
-        // Create GoogleAuthService with GoogleAuthModel
+        Task UpdateUserInfoAsync(UpdateUserModel source, JwtUserModel jwtUser);
     }
 }

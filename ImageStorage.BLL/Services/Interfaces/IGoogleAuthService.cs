@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ImageStorage.BLL.Services.Interfaces
 {
-    public interface IViewService
+    public interface IGoogleAuthService
     {
-        Task CreateViewOnPublication(Guid publicationId, JwtUserModel jwtUser);
+        Task<string> LoginByGoogleAccountAsync(GoogleAuthModel source);
     }
 }
