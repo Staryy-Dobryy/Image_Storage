@@ -49,7 +49,7 @@ namespace ImageStorage.DAL.Repositories.Realization
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<TEntity> AddAndReturn(TEntity entity)
+        public async Task<TEntity> AddAndReturnAsync(TEntity entity)
         {
             var createdEntity = await _dbContext.Set<TEntity>().AddAsync(entity);
 

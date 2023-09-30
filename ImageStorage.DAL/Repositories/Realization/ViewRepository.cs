@@ -1,6 +1,7 @@
 ﻿using ImageStorage.DAL.Context;
 using ImageStorage.DAL.Entities;
 using ImageStorage.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace ImageStorage.DAL.Repositories.Realization
     {
         protected ImageSrorageDbContext _dbContext;
 
-        protected ViewRepository(ImageSrorageDbContext dbContext)
+        public ViewRepository(ImageSrorageDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -23,9 +24,10 @@ namespace ImageStorage.DAL.Repositories.Realization
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<bool> PublicationViewedByUserIdAsync(Guid publicationId, Guid userId)
+        public async Task<bool> PublicationViewedByUserIdAsync(Guid publicationId, Guid userId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<View>()
+                .AnyAsync(x => x.PublicationId == publicationId && x.UserId == userId);
         }
     }
 }
