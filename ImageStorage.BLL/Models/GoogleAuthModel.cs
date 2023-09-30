@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageStorage.BLL.Models.CreateModels
+namespace ImageStorage.BLL.Models
 {
-    public class CreatePublicationModel
+    public class GoogleAuthModel
     {
-        public string Description { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string ImageUrl { get; set; }
-        public bool IsPublic { get; set; }
     }
 }

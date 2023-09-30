@@ -8,7 +8,7 @@ namespace ImageStorage.BLL.Models
 {
     public class JwtUserModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Email { get; set; }
     }
 }
