@@ -13,7 +13,8 @@ namespace ImageStorage.DAL.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<View> builder)
         {
-            builder.HasIndex(x => x.PublicationId);
+            builder.HasNoKey();
+            builder.HasIndex(x => new { x.PublicationId, x.UserId });
         }
     }
 }

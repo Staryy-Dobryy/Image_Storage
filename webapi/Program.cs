@@ -1,4 +1,5 @@
 using ImageStorage.Extentions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.Services.UseDatabase();
 
 app.UseHttpsRedirection();
 

@@ -8,10 +8,7 @@ namespace ImageStorage.DAL.Context
     {
         public ImageSrorageDbContext() { }
 
-        public ImageSrorageDbContext(DbContextOptions options) : base(options) 
-        {
-            Database.EnsureCreated();
-        }
+        public ImageSrorageDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<User> Users { get; set; }

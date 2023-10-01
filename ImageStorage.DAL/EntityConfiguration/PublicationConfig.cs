@@ -19,7 +19,8 @@ namespace ImageStorage.DAL.EntityConfiguration
                 .HasMany(x => x.Comments)
                 .WithOne(x => x.Publication)
                 .HasPrincipalKey(x => x.Id)
-                .HasForeignKey(x => x.PublicationId);
+                .HasForeignKey(x => x.PublicationId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

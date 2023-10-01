@@ -18,6 +18,7 @@ namespace ImageStorage.DAL.EntityConfiguration
             builder
                 .HasOne(x => x.User)
                 .WithOne(x => x.Account)
+                .HasForeignKey<User>(x => x.AccountId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

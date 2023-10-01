@@ -24,6 +24,24 @@ namespace ImageStorage.Extentions
             services.AddScoped<IViewRepository, ViewRepository>();
         }
 
+        public static void UseDatabase(this IServiceProvider services)
+        {
+            using (var scope = services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                try
+                {
+                    var context = serviceProvider.GetRequiredService<ImageSrorageDbContext>();
+                    context.Database.EnsureCreated();
+
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+            }
+        }
+
         private static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ImageSrorageDbContext>(options => options.UseSqlServer(configuration["ConnectionString"]));

@@ -12,7 +12,7 @@ namespace ImageStorage.DAL.Entities
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public bool GoogleAuth { get; set; }
-        public Guid AccountId { get; set; }
-        public virtual Account Account { get; set; }    
+        public Guid? AccountId { get; set; }
+        public virtual Account? Account { get; set; }    
     }
 }
