@@ -39,30 +39,27 @@
 <!--Current post window end-->
 
 <div class="add-scroll full-screan">
-  <nav class="navigation bg-yellow w-100 content-center-end pw-1">
-    <button class="btn-white-small ml-1">My gallery</button>
-    <button class="btn-white-small ml-1 mr-3">Account</button>
-  </nav>
-  <div *ngIf="general" class="content-center col">
-    <div class="mw-3">
-      <h1 class="mb-1">Popular</h1>
-      <div class="content-center">
-        <div *ngFor="let item of general.popular" class="popular-item bg-black mh-1 content-center-end col">
-          <img src="{{ item.imageUrl }}">
-          <div class="popular-shadow"></div>
-          <span class="popular-description mb-1">{{ item.description }}</span>
-        </div>
-      </div>
-      <div class="row">
-        <h1 class="mt-2 mb-1">Interesting</h1>
-        <div class="content-center w-75 flex-wrap">
-          <div *ngFor="let item of general.interesting" class="interesting-item bg-black mh-1 content-center-end col">
+  <app-navigation></app-navigation>
+    <div *ngIf="general" class="content-center col">
+      <div class="mw-3">
+        <h1 class="mb-1">Popular</h1>
+        <div class="content-center">
+          <div *ngFor="let item of general.popular" class="popular-item bg-black mh-1 content-center-end col">
             <img src="{{ item.imageUrl }}">
-            <div class="interesting-shadow"></div>
-            <span class="interesting-description mb-1">{{ item.description }}</span>
+            <div class="popular-shadow"></div>
+            <span class="popular-description mb-1">{{ item.description }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <h1 class="mt-2 mb-1">Interesting</h1>
+          <div class="content-center w-75 flex-wrap">
+            <div *ngFor="let item of general.interesting" class="interesting-item bg-black mh-1 content-center-end col">
+              <img src="{{ item.imageUrl }}">
+              <div class="interesting-shadow"></div>
+              <span class="interesting-description mb-1">{{ item.description }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </div>

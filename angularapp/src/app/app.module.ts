@@ -9,10 +9,14 @@ import { HomeComponent } from './Components/Home/home.component';
 import { InViewAnimationDirective } from './Directives/elemInVievAnim.directive';
 import { NotFoundComponent } from './Components/NotFound/not-found.component';
 import { GeneralComponent } from './Components/General/general.component';
+import { GalleryComponent } from './Components/Gallery/gallery.component';
+import { NavigationComponent } from './Components/Navigation/navigation.component';
+import { DragDirective } from './Directives/dragDropFile.directive';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'general', component: GeneralComponent },
+  { path: 'gallery', component: GalleryComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -21,8 +25,11 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     GeneralComponent,
+    GalleryComponent,
     NotFoundComponent,
-    InViewAnimationDirective
+    InViewAnimationDirective,
+    NavigationComponent,
+    DragDirective
   ],
   imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes), FormsModule, ReactiveFormsModule],
   providers: [],
