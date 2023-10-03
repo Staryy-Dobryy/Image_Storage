@@ -14,10 +14,10 @@ export class GeneralComponent implements OnInit {
   general: IGeneral;
   publication: IPublication | undefined;
 
-  constructor(private generalSirvice: GeneralService) { }
+  constructor(private generalService: GeneralService) { }
 
   ngOnInit(): void {
-    this.generalSirvice.getGeneral().subscribe(general => {
+    this.generalService.getGeneral().subscribe(general => {
       this.general = general;
     })
   }

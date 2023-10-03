@@ -3,17 +3,17 @@
   <div (click)="publication = undefined" class="alert-bg"></div>
   <div class="alert bg-white ph-3 pw-3 flex row w-75 h-75">
     <div class="w-100 h-75 content-center col">
-      <img src="assets/tempimg2.png" style=" height: auto; max-width: 100%; max-height: 100%;">
+      <img src="{{ publication.imageUrl }}" style=" height: auto; max-width: 100%; max-height: 100%;">
     </div>
     <div class="w-100p ph-1">
       <div class="content-center col flex-start">
-        <h3 class="mw-2">Ddddd</h3>
+        <h3 class="mw-2">{{ publication.description }}</h3>
         <div class="flex">
           <div class="content-center">
             <a href="assets/tempimg.png" download class="btn-yellow mr-1">Download .PNG</a>
             <h4>Author:</h4>
-            <p class="link-dark mh-1">sffsfs</p>
-            <img src="assets/tempimg.png" style="height: 50px; width: 50px; border-radius: 100%;">
+            <p class="link-dark mh-1">{{ publication.author.userName }}</p>
+            <img src="{{ publication.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
           </div>
         </div>
       </div>
@@ -24,10 +24,10 @@
           <div class="content-center-start flex-wrap">
 
             <!--Comment message template-->
-            <div class="content-center-start w-100p row">
-              <img src="assets/tempimg.png" style="height: 50px; width: 50px; border-radius: 100%;">
-              <h4 class="mh-1">Author:</h4>
-              <p style="text-align: left"> Ddosdododododod dodoodo dodsdsdk sdodssdodsodsokdo dsoddsdsdssd ds</p>
+            <div *ngFor="let comment on publication.comments" class="content-center-start w-100p row">
+              <img src="{{ comment.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
+              <h4 class="mh-1">{{ comment.author.userName }}:</h4>
+              <p style="text-align: left">{{ comment.text }}</p>
             </div>
           </div>
 
