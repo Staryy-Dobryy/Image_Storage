@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { IGallery } from '../../Models/gallery.model';
+import { GalleryService } from '../../Services/gallery.service';
+import { IPublication } from '../../Models/publication.model';
 
 @Component({
   selector: 'app-gallery',
@@ -8,6 +11,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent implements OnInit {
+  publication: IPublication | undefined;
+  gallery: IGallery
   image: File;
   imagePreview: string;
 
@@ -18,14 +23,16 @@ export class GalleryComponent implements OnInit {
   });
 
 
-  constructor(private client: HttpClient, private formBuilder: FormBuilder) {
+  constructor(private client: HttpClient, private formBuilder: FormBuilder, private galleryService: GalleryService) {
 
   }
 
 
 
   ngOnInit(): void {
-
+    this.galleryService.getGeneral().subscribe(gallery => {
+      this.gallery = gallery;
+    })
   }
 
   selectFile(event): void {
