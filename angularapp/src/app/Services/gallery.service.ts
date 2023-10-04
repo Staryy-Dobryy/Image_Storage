@@ -12,6 +12,10 @@ export class GalleryService {
   }
 
   getGeneral(): Observable<IGallery> {
-    return this.http.get<IGallery>("/general");
+    return this.http.get<IGallery>("/gallery");
+  }
+
+  createPublication(formData: FormData, publicationDetails: any): Observable<undefined> {
+    return this.http.post<undefined>("/Publication", formData, { params: publicationDetails })
   }
 }
