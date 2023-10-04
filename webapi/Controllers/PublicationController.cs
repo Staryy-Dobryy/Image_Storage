@@ -16,12 +16,12 @@ namespace webapi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(IFormFile image, string description)
+        public async Task<IActionResult> Post(IFormFile image)
         {
             if (image != null)
             {
                 // путь к папке Files
-                string path = "/Images/" + image.FileName;
+                string path = "/Images/" + image.FileName.Split(".")[0] + ".png";
                 // сохраняем файл в папку Files в каталоге wwwroot
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
