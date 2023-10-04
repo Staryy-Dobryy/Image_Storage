@@ -43,24 +43,24 @@
   <div class="content-center col">
     <div class="mw-3">
       <h1>Create new publication</h1>
-      <div class="flex row mw-1 w-100">
+      <form [formGroup]="uploadPublicationForm" class="flex row mw-1 w-100">
         <label class="w-50 h-50 mh-1 content-center" [class.file-upload-zone]="!imagePreview" [class.file-uploaded]="imagePreview" dragFile (file)="getDroppedFile($event)">
           <img *ngIf="imagePreview" style=" height: inherit;" src="{{imagePreview}}" alt="Alternate Text" />
-          <span class="file-upload-text" *ngIf="!image">Drop your picture here</span>
-          <input type="file" style="display: none;" (change)="getDroppedFile($event)" accept="image/*" />
+          <span class="file-upload-text" *ngIf="!imagePreview">Drop your picture here</span>
+          <input type="file" formControlName="image" style="display: none;" (change)="getDroppedFile($event)" accept="image/*" />
         </label>
         <div class="mr-3">
           <label class="form-group">
             <span class="ml-1 mw-1">Description</span>
-            <input type="text" class="text-input flex-start text-left mb-2 w-25" placeholder="Enter publication description">
+            <input type="text" formControlName="description" class="text-input flex-start text-left mb-2 w-25" placeholder="Enter publication description">
           </label>
           <label class="flex">
-            <input type="checkbox" name="name" value="" />
+            <input type="checkbox" formControlName="isPublic" name="name" value="" />
             <span class="ml-1">Make it public</span>
           </label>
-          <input type="button" class="btn-yellow w-100p mt-2" name="name" value="Create" />
+          <input type="button" (click)="uploadPublicationSubmit()" class="btn-yellow w-100p mt-2" name="name" value="Create" />
         </div>
-      </div>
+      </form>
       <h1 class="mb-1">Gallery</h1>
       <div *ngIf="gallery" class="content-center flex-wrap">
         <div *ngFor="let item of gallery.images" class="popular-item bg-black mh-1 content-center-end col">

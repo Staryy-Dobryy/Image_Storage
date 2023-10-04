@@ -13,7 +13,6 @@ import { IPublication } from '../../Models/publication.model';
 export class GalleryComponent implements OnInit {
   publication: IPublication | undefined;
   gallery: IGallery
-  image: File;
   imagePreview: string;
 
   uploadPublicationForm = new FormGroup({
@@ -23,7 +22,7 @@ export class GalleryComponent implements OnInit {
   });
 
 
-  constructor(private client: HttpClient, private formBuilder: FormBuilder, private galleryService: GalleryService) {
+  constructor(private formBuilder: FormBuilder, private galleryService: GalleryService) {
 
   }
 
@@ -35,15 +34,9 @@ export class GalleryComponent implements OnInit {
     })
   }
 
-  selectFile(event): void {
-    const file = event.target.files[0];
-    this.uploadPublicationForm.get("image")?.setValue(file)
-  }
-
   uploadPublicationSubmit(): void {
-    console.log(this.uploadPublicationForm);
+    const publicationImage = this.uploadPublicationForm["image"]
 
-    var publicationImage = this.uploadPublicationForm.get("image")!.value!
     const publicationDetails = {
       description: this.uploadPublicationForm.get("description")!.value!,
       isPublic: this.uploadPublicationForm.get("isPublic")!.value!
@@ -53,23 +46,28 @@ export class GalleryComponent implements OnInit {
     formData.append('image', publicationImage, publicationImage.name);
 
 
-    this.client.post("https://localhost:7161/Publication", formData, { params: publicationDetails }).subscribe();
+    this.galleryService.createPublication(formData, publicationDetails).subscribe(() => {
+
+    },
+      error => {
+        console.error("Publication failed", error)
+      });
   }
 
   getDroppedFile(file: File | any): void {
     try {
       if (file.type.includes("image")) {
-        this.image = file;
+        this.uploadPublicationForm["image"] = file;
         let reader = new FileReader()
-        console.log(this.image)
+        console.log(this.uploadPublicationForm["image"])
         reader.readAsDataURL(file)
         reader.onload = (event) => this.imagePreview = event.target!.result!.toString();
         return
       }
       else if (file.target.files[0].type.includes("image")) {
         let reader = new FileReader()
-        this.image = file.target.files[0]
-        reader.readAsDataURL(this.image)
+        this.uploadPublicationForm["image"] = file.target.files[0]
+        reader.readAsDataURL(this.uploadPublicationForm["image"])
         reader.onload = (event) => this.imagePreview = event.target!.result!.toString();
       }
     }

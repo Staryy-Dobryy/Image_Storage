@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { HomeService } from '../../Services/home.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +34,18 @@ export class HomeComponent {
   loginFormOpened: boolean = false;
   registrationFormOpened: boolean = false;
 
-  constructor(http: HttpClient) {
+  registrationForm = new FormGroup({
+    userName: new FormControl<string>(''),
+    email: new FormControl<string>(''),
+    password: new FormControl<string>(''),
+  });
+
+  loginForm = new FormGroup({
+    email: new FormControl<string>(''),
+    password: new FormControl<string>(''),
+  });
+
+  constructor(private homeService: HomeService, private router: Router) {
 
   }
 
@@ -51,11 +65,24 @@ export class HomeComponent {
       (googleAuthUser: any) => {
 
         let profile = googleAuthUser.getBasicProfile();
-        console.log('Token || ' + googleAuthUser.getAuthResponse().id_token);
-        console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
+        // console.log('Token || ' + googleAuthUser.getAuthResponse().id_token);
+        // console.log('ID: ' + profile.getId());
+        // console.log('Name: ' + profile.getName());
+        // console.log('Image URL: ' + profile.getImageUrl());
+        // console.log('Email: ' + profile.getEmail());
+
+        const authParams = {
+          email: profile.getEmail(),
+          userName: profile.getName(),
+          imageUrl: profile.getImageUrl()
+        }
+
+        this.homeService.sendGoogleAuthInfo(authParams).subscribe(jwt => {
+          localStorage.setItem("jwt", jwt)
+        },
+          error => {
+            console.error("Google auth failed", error)
+          })
 
       }, (error: any) => {
         this.googleAuthFailAlert = true;
@@ -65,6 +92,7 @@ export class HomeComponent {
   }
 
   googleAuthSDK() {
+
     (<any>window)['googleSDKLoaded'] = () => {
       (<any>window)['gapi'].load('auth2', () => {
         this.auth2 = (<any>window)['gapi'].auth2.init({
@@ -126,6 +154,24 @@ export class HomeComponent {
     }
   }
 
+  sendRegistrationForm() {
+    this.homeService.sendRegistrationForm(this.registrationForm).subscribe(jwt => {
+      localStorage.setItem("jwt", jwt)
+      this.router.navigate(['/general']);
+    },
+      error => {
+        console.error("Registration failed", error)
+    })
+  }
+
+  sendLoginForm() {
+    this.homeService.sendLoginForm(this.loginForm).subscribe(jwt => {
+      localStorage.setItem("jwt", jwt)
+    },
+      error => {
+        console.error("Login failed", error)
+      })
+  }
 
   openLoginForm(): void {
     this.registrationFormOpened = false;
