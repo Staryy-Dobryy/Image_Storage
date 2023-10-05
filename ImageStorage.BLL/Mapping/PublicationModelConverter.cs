@@ -13,9 +13,12 @@ namespace ImageStorage.BLL.Mapping
     {
         public PublicationModel Convert(Publication source, PublicationModel destination, ResolutionContext context)
         {
+            if (destination is null) destination = new PublicationModel();
+
             destination.Id = source.Id.ToString();
             destination.Discription = source.Description;
             destination.ImageUrl = source.ImageUrl;
+            destination.Views = source.ViewsCount;
             destination.Author = context.Mapper.Map<UserModel>(source.Author);
             
             if (source.Comments is null)

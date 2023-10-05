@@ -13,6 +13,8 @@ namespace ImageStorage.BLL.Mapping
     {
         public Account Convert(CreateAccountModel source, Account destination, ResolutionContext context)
         {
+            if (destination is null) destination = new Account();
+
             destination.Email = source.Email;
             destination.Password = source.Password;
             destination.User = new()

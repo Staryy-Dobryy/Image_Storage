@@ -13,6 +13,8 @@ namespace ImageStorage.BLL.Mapping
     {
         public CommentModel Convert(Comment source, CommentModel destination, ResolutionContext context)
         {
+            if (destination is null) destination = new CommentModel();
+
             destination.Text = source.Text;
             destination.CreationTime = source.CreationTime;
             destination.Author = new()

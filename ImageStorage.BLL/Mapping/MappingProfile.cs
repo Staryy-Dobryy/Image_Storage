@@ -32,6 +32,11 @@ namespace ImageStorage.BLL.Mapping
             CreateMap<Publication, PublicationModel>()
                 .ConvertUsing<PublicationModelConverter>();
 
+            CreateMap<Publication, PreviewModel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl));
+
             CreateMap<CreatePublicationModel, Publication>()
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
