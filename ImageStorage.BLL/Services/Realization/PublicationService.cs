@@ -45,5 +45,12 @@ namespace ImageStorage.BLL.Services.Realization
         {
             await _publicationRepository.DeleteAsync(id);
         }
+
+        public async Task<List<PreviewModel>> GetPublicationsPreviews(int take, int skip)
+        {
+            var publicationsList = await _publicationRepository.GetPopularPublicationsAsync(take, skip);
+
+            return _mapper.Map<List<PreviewModel>>(publicationsList);
+        }
     }
 }

@@ -41,6 +41,7 @@ namespace ImageStorage.BLL.Services.Realization
             }
 
             var entity = _mapper.Map<Account>(source);
+            entity.Password = _hashTool.HashPassword(entity.Password);
 
             var account = await _accountRepository.AddAndReturnAsync(entity);
 
