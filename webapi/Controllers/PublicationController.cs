@@ -5,7 +5,7 @@ using System.IO;
 namespace webapi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PublicationController : ControllerBase
     {
         IWebHostEnvironment _appEnvironment;

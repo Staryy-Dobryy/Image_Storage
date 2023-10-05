@@ -1,4 +1,5 @@
-﻿using ImageStorage.BLL.Models.CreateModels;
+﻿using ImageStorage.BLL.Models;
+using ImageStorage.BLL.Models.CreateModels;
 using ImageStorage.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -9,20 +10,21 @@ namespace webapi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RegistrationController : ControllerBase
+    public class GoogleAuthController : ControllerBase
     {
-        private readonly IAccountService _accountService;
-        public RegistrationController(IAccountService accountService)
+        private readonly IGoogleAuthService _googleAuthService;
+
+        public GoogleAuthController(IGoogleAuthService googleAuthService)
         {
-            _accountService = accountService;
+            _googleAuthService = googleAuthService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateAccountModel model)
+        public async Task<IActionResult> Post(GoogleAuthModel model)
         {
             if (ModelState.IsValid)
             {
-                string jwt = await _accountService.CreateAccountAsync(model);
+                string jwt = await _googleAuthService.LoginByGoogleAccountAsync(model);
                 return new JsonResult(jwt);
             }
 

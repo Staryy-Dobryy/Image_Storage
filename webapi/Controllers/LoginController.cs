@@ -1,4 +1,5 @@
-﻿using ImageStorage.BLL.Models.CreateModels;
+﻿using ImageStorage.BLL.Models;
+using ImageStorage.BLL.Models.CreateModels;
 using ImageStorage.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -9,20 +10,20 @@ namespace webapi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RegistrationController : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        public RegistrationController(IAccountService accountService)
+        public LoginController(IAccountService accountService)
         {
             _accountService = accountService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateAccountModel model)
+        public async Task<IActionResult> Post(AccountModel model)
         {
             if (ModelState.IsValid)
             {
-                string jwt = await _accountService.CreateAccountAsync(model);
+                string jwt = await _accountService.LoginToAccountAsync(model);
                 return new JsonResult(jwt);
             }
 
