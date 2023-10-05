@@ -12,7 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD:webapi/webapi.csproj
     <Folder Include="wwwroot\" />
+=======
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ImageStorage.BLL\ImageStorage.BLL.csproj" />
+>>>>>>> 7fed052d9d5fb4eee324f56011284e298e8c9ddf:webapi/ImageStorage.Api.csproj
   </ItemGroup>
 
 </Project>
