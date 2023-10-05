@@ -5,5 +5,6 @@ export interface IPublication {
   description: string;
   imageUrl: string;
   author: IUser;
+  views: number;
   comments: IComment[];
 }

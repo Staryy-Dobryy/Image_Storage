@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  authorized: boolean = false;
 
   auth2: any;
   @ViewChild('loginRef', { static: false }) loginElement!: ElementRef;
@@ -49,7 +51,11 @@ export class HomeComponent {
 
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
+    this.authorized = localStorage.getItem("jwt") ? true : false;
+  }
+
+  ngAfterViewInit(): void {
     this.scrollTargets = {
       0: this.target,
       1: this.scope,
@@ -79,6 +85,7 @@ export class HomeComponent {
 
         this.homeService.sendGoogleAuthInfo(authParams).subscribe(jwt => {
           localStorage.setItem("jwt", jwt)
+          this.router.navigate(['/general']);
         },
           error => {
             console.error("Google auth failed", error)
@@ -167,6 +174,7 @@ export class HomeComponent {
   sendLoginForm() {
     this.homeService.sendLoginForm(this.loginForm).subscribe(jwt => {
       localStorage.setItem("jwt", jwt)
+      this.router.navigate(['/general']);
     },
       error => {
         console.error("Login failed", error)

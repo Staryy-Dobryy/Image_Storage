@@ -7,10 +7,11 @@
     </div>
     <div class="w-100p ph-1">
       <div class="content-center col flex-start">
+        <h4>{{ publication.views }} views</h4>
         <h3 class="mw-2">{{ publication.description }}</h3>
         <div class="flex">
           <div class="content-center">
-            <a href="assets/tempimg.png" download class="btn-yellow mr-1">Download .PNG</a>
+            <a href="{{ publication.imageUrl }}" download class="btn-yellow mr-1">Download .PNG</a>
             <h4>Author:</h4>
             <p class="link-dark mh-1">{{ publication.author.userName }}</p>
             <img src="{{ publication.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">

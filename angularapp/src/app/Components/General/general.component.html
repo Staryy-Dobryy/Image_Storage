@@ -7,10 +7,11 @@
     </div>
     <div class="w-100p ph-1">
       <div class="content-center col flex-start">
+        <h4>{{ publication.views }} views</h4>
         <h3 class="mw-2">{{ publication.description }}</h3>
         <div class="flex">
           <div class="content-center">
-            <a href="assets/tempimg.png" download class="btn-yellow mr-1">Download .PNG</a>
+            <a href="{{ publication.imageUrl }}" download class="btn-yellow mr-1">Download .PNG</a>
             <h4>Author:</h4>
             <p class="link-dark mh-1">{{ publication.author.userName }}</p>
             <img src="{{ publication.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
@@ -44,7 +45,7 @@
       <div class="mw-3">
         <h1 class="mb-1">Popular</h1>
         <div class="content-center">
-          <div *ngFor="let item of general.popular" class="popular-item bg-black mh-1 content-center-end col">
+          <div *ngFor="let item of general.popular" class="popular-item bg-black mh-1 content-center-end col" (click)="getPublication(item.id)">
             <img src="{{ item.imageUrl }}">
             <div class="popular-shadow"></div>
             <span class="popular-description mb-1">{{ item.description }}</span>
@@ -53,7 +54,7 @@
         <div class="row">
           <h1 class="mt-2 mb-1">Interesting</h1>
           <div class="content-center w-75 flex-wrap">
-            <div *ngFor="let item of general.interesting" class="interesting-item bg-black mh-1 content-center-end col">
+            <div *ngFor="let item of general.interesting" class="interesting-item bg-black mh-1 content-center-end col" (click)="getPublication(item.id)">
               <img src="{{ item.imageUrl }}">
               <div class="interesting-shadow"></div>
               <span class="interesting-description mb-1">{{ item.description }}</span>

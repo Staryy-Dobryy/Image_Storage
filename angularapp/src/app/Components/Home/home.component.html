@@ -60,8 +60,15 @@
   <nav class="navigation bg-yellow w-100 content-center-end pw-1">
     <span (click)="scrollToElement('scope')" class="link-dark mh-1">Scope</span>
     <span (click)="scrollToElement('about')" class="link-dark mh-1">About</span>
-    <button (click)="openLoginForm()" class="btn-white-small ml-2">Login</button>
-    <button (click)="openRegistrationForm()" class="btn-white-small mh-1 mr-3">Registration</button>
+    <div *ngIf="authorized">
+      <button routerLink="/general" class="btn-white-small mh-1 ml-2">General</button>
+      <button routerLink="/gallery" class="btn-white-small mh-1">My gallery</button>
+      <button routerLink="/account" class="btn-white-small mh-1 mr-3">Account</button>
+    </div>
+    <div *ngIf="!authorized">
+      <button (click)="openLoginForm()" class="btn-white-small ml-2">Login</button>
+      <button (click)="openRegistrationForm()" class="btn-white-small mh-1 mr-3">Registration</button>
+    </div>
   </nav>
   <p class="slide-name">Welcome to:</p>
   <p inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">Image Storage</p>

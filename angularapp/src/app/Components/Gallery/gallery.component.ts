@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { IGallery } from '../../Models/gallery.model';
 import { GalleryService } from '../../Services/gallery.service';
 import { IPublication } from '../../Models/publication.model';
+import { PublicationService } from '../../Services/publication.service';
 
 @Component({
   selector: 'app-gallery',
@@ -22,7 +23,7 @@ export class GalleryComponent implements OnInit {
   });
 
 
-  constructor(private formBuilder: FormBuilder, private galleryService: GalleryService) {
+  constructor(private galleryService: GalleryService, private publicationService: PublicationService) {
 
   }
 
@@ -46,7 +47,7 @@ export class GalleryComponent implements OnInit {
     formData.append('image', publicationImage, publicationImage.name);
 
 
-    this.galleryService.createPublication(formData, publicationDetails).subscribe(() => {
+    this.publicationService.createPublication(formData, publicationDetails).subscribe(() => {
 
     },
       error => {

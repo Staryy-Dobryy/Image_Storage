@@ -3,7 +3,8 @@ const PROXY_CONFIG = [
     context: [
       "/Registration",
       "/Login",
-      "/Publication"
+      "/api/Publication",
+      "/api/General"
     ],
     target: "https://localhost:7161",
     secure: false
