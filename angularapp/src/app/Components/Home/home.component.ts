@@ -78,8 +78,8 @@ export class HomeComponent implements OnInit {
         // console.log('Email: ' + profile.getEmail());
 
         const authParams = {
+          name: profile.getName(),
           email: profile.getEmail(),
-          userName: profile.getName(),
           imageUrl: profile.getImageUrl()
         }
 

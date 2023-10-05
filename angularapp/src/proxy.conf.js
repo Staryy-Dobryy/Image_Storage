@@ -1,10 +1,11 @@
 const PROXY_CONFIG = [
   {
     context: [
-      "/Registration",
-      "/Login",
+      "/api/Registration",
+      "/api/Login",
       "/api/Publication",
-      "/api/General"
+      "/api/General",
+      "/api/GoogleAuth"
     ],
     target: "https://localhost:7161",
     secure: false

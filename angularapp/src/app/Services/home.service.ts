@@ -14,12 +14,12 @@ export class HomeService {
   sendRegistrationForm(registrationForm: FormGroup): Observable<string> {
 
     const registationParams = {
-      userName: registrationForm.get("userName")!.value,
-      email: registrationForm.get("email")!.value,
-      password: registrationForm.get("password")!.value
+      Name: registrationForm.get("userName")!.value,
+      Email: registrationForm.get("email")!.value,
+      Password: registrationForm.get("password")!.value
     };
 
-    return this.http.post<string>("/Registration", {}, { params: registationParams });
+    return this.http.post<string>("/api/Registration", registationParams);
   }
 
   sendLoginForm(loginForm: FormGroup): Observable<string> {
@@ -28,10 +28,10 @@ export class HomeService {
       password: loginForm.get("password")!.value
     };
 
-    return this.http.post<string>("/Login", {}, { params: loginParams });
+    return this.http.post<string>("/api/Login", loginParams);
   }
 
   sendGoogleAuthInfo(authParams: any) {
-    return this.http.post<string>("/GoogleAuth", {}, { params: authParams });
+    return this.http.post<string>("/api/GoogleAuth", authParams);
   }
 }
