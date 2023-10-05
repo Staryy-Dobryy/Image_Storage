@@ -1,6 +1,6 @@
 
 export interface IPreview {
-  id: number;
+  id: string;
   imageUrl: string;
   description: string;
 }

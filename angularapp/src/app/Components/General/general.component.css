@@ -1,13 +1,3 @@
-.add-scroll{
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-.navigation{
-    position: sticky;
-    top: 0;
-    z-index: 5;
-}
-
 .popular-item {
   height: 315px;
   width: 560px;

@@ -421,6 +421,15 @@ body {
   align-items: flex-start;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.add-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 @media (max-width: 1024px) {
   html {
     font-size: 16px;

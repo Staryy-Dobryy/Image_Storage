@@ -11,7 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\Components\Home\" />
-    <Folder Include="src\app\Directives\" />
     <Folder Include="src\app\Services\" />
     <Folder Include="src\app\Models\" />
   </ItemGroup>

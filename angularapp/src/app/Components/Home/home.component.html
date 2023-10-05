@@ -12,19 +12,19 @@
   <div class="alert-bg" (click)="closeLoginForm()"></div>
   <div class="alert bg-white ph-3 pw-3 flex col w-25">
     <h1 class="mw-3">Login</h1>
-    <div class="content-center col">
+    <form [formGroup]="loginForm" class="content-center col">
       <label class="form-group">
         <span class="ml-1 mw-1">E-mail address</span>
-        <input type="email" class="text-input mb-1" placeholder="Enter your email">
+        <input type="email" formControlName="email" class="text-input mb-1" placeholder="Enter your email">
       </label>
       <label class="form-group">
         <span class="ml-1 mw-1">Password</span>
-        <input type="email" class="text-input mb-1" placeholder="Password">
+        <input type="password" formControlName="password" class="text-input mb-1" placeholder="Password">
       </label>
-      <button class="btn-yellow w-100p">Login</button>
+      <button (click)="sendLoginForm()" class="btn-yellow w-100p">Login</button>
       <h4 class="mw-2">or</h4>
-      <button type="button" class="login-with-google-btn btn-white w-100p mb-1" #loginRef>Sign in with Google</button>
-    </div>
+      <button id="loginRef" class="login-with-google-btn btn-white w-100p mb-1" #loginRef>Sign in with Google</button>
+    </form>
   </div>
 </div>
 <!--Login form end-->
@@ -34,20 +34,24 @@
   <div class="alert-bg" (click)="closeRegistrationForm()"></div>
   <div class="alert bg-white ph-3 pw-3 flex col w-25">
     <h1 class="mw-3">Registration</h1>
-    <div class="content-center col">
+    <form [formGroup]="registrationForm" class="content-center col">
+      <label class="form-group">
+        <span class="ml-1 mw-1">Username</span>
+        <input type="text" formControlName="userName" class="text-input mb-1" placeholder="Enter your username">
+      </label>
       <label class="form-group">
         <span class="ml-1 mw-1">E-mail address</span>
-        <input type="email" class="text-input mb-1" placeholder="Enter your email">
+        <input type="email" formControlName="email" class="text-input mb-1" placeholder="Enter your email">
       </label>
       <label class="form-group">
         <span class="ml-1 mw-1">Password</span>
-        <input type="email" class="text-input mb-1" placeholder="Create password">
+        <input type="password" formControlName="password" class="text-input mb-1" placeholder="Create password">
       </label>
-      <button class="btn-yellow w-100p">Join to Comunity</button>
+      <button (click)="sendRegistrationForm()" class="btn-yellow w-100p">Join to Comunity</button>
       <h4 class="mw-2">or</h4>
       <button type="button" class="login-with-google-btn btn-white w-100p mb-1" #loginRef>Sign in with Google</button>
       <p class="mb-3">If you have an account - <span (click)="openLoginForm()" class="link-dark">Login</span></p>
-    </div>
+    </form>
   </div>
 </div>
 <!--Registration form end-->
@@ -56,8 +60,15 @@
   <nav class="navigation bg-yellow w-100 content-center-end pw-1">
     <span (click)="scrollToElement('scope')" class="link-dark mh-1">Scope</span>
     <span (click)="scrollToElement('about')" class="link-dark mh-1">About</span>
-    <button (click)="openLoginForm()" class="btn-white-small ml-2">Login</button>
-    <button (click)="openRegistrationForm()" class="btn-white-small mh-1 mr-3">Registration</button>
+    <div *ngIf="authorized">
+      <button routerLink="/general" class="btn-white-small mh-1 ml-2">General</button>
+      <button routerLink="/gallery" class="btn-white-small mh-1">My gallery</button>
+      <button routerLink="/account" class="btn-white-small mh-1 mr-3">Account</button>
+    </div>
+    <div *ngIf="!authorized">
+      <button (click)="openLoginForm()" class="btn-white-small ml-2">Login</button>
+      <button (click)="openRegistrationForm()" class="btn-white-small mh-1 mr-3">Registration</button>
+    </div>
   </nav>
   <p class="slide-name">Welcome to:</p>
   <p inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">Image Storage</p>
@@ -72,8 +83,8 @@
   </div>
 </div>
 <div #about class="full-screan bg-yellow content-center border-0 col" id="about">
-  <h1 inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">A little about the project</h1>
-  <h2></h2>
+  <p inViewAnimation animationClassName="slide-in-anim" class="opacity-0 slide-name-strong">A little about the project</p>
+  <p inViewAnimation animationClassName="slide-in-anim" class="ph-3 opacity-0 slide-info">The project was created by KNTU student Nikita Steinikov (<a class="link-dark" href="https://github.com/Staryy-Dobryy">https://github.com/Staryy-Dobryy</a>) for educational purposes. The project is built from two components: Angular app, and ASP.Net Core WebApi. The development start date is 09/16/2023. The development end date is (...).</p>
 </div>
 <div #bottom class="full-screan content-center border-0 row">
   <div class="w-100 ph-3 mh-3">
@@ -83,6 +94,10 @@
     <div class="bg-white ph-3 pw-3 flex col w-25">
       <h1 class="mw-3">Registration</h1>
       <div class="content-center col">
+        <label class="form-group">
+          <span class="ml-1 mw-1">Username</span>
+          <input type="email" class="text-input mb-1" placeholder="Enter your username">
+        </label>
         <label class="form-group">
           <span class="ml-1 mw-1">E-mail address</span>
           <input type="email" class="text-input mb-1" placeholder="Enter your email">

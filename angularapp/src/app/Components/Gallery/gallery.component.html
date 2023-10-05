@@ -1,0 +1,75 @@
+<!--Current post window-->
+<div *ngIf="publication" class="content-center full-screan publication">
+  <div (click)="publication = undefined" class="alert-bg"></div>
+  <div class="alert bg-white ph-3 pw-3 flex row w-75 h-75">
+    <div class="w-100 h-75 content-center col">
+      <img src="{{ publication.imageUrl }}" style=" height: auto; max-width: 100%; max-height: 100%;">
+    </div>
+    <div class="w-100p ph-1">
+      <div class="content-center col flex-start">
+        <h4>{{ publication.views }} views</h4>
+        <h3 class="mw-2">{{ publication.description }}</h3>
+        <div class="flex">
+          <div class="content-center">
+            <a href="{{ publication.imageUrl }}" download class="btn-yellow mr-1">Download .PNG</a>
+            <h4>Author:</h4>
+            <p class="link-dark mh-1">{{ publication.author.userName }}</p>
+            <img src="{{ publication.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
+          </div>
+        </div>
+      </div>
+      <hr class="mw-2">
+      <div>
+        <span>Comments</span>
+        <div class="mt-2 comments">
+          <div class="content-center-start flex-wrap">
+
+            <!--Comment message template-->
+            <div *ngFor="let comment on publication.comments" class="content-center-start w-100p row">
+              <img src="{{ comment.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
+              <h4 class="mh-1">{{ comment.author.userName }}:</h4>
+              <p style="text-align: left">{{ comment.text }}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Current post window end-->
+
+<div class="add-scroll full-screan">
+  <app-navigation></app-navigation>
+  <div class="content-center col">
+    <div class="mw-3">
+      <h1>Create new publication</h1>
+      <form [formGroup]="uploadPublicationForm" class="flex row mw-1 w-100">
+        <label class="w-50 h-50 mh-1 content-center" [class.file-upload-zone]="!imagePreview" [class.file-uploaded]="imagePreview" dragFile (file)="getDroppedFile($event)">
+          <img *ngIf="imagePreview" style=" height: inherit;" src="{{imagePreview}}" alt="Alternate Text" />
+          <span class="file-upload-text" *ngIf="!imagePreview">Drop your picture here</span>
+          <input type="file" formControlName="image" style="display: none;" (change)="getDroppedFile($event)" accept="image/*" />
+        </label>
+        <div class="mr-3">
+          <label class="form-group">
+            <span class="ml-1 mw-1">Description</span>
+            <input type="text" formControlName="description" class="text-input flex-start text-left mb-2 w-25" placeholder="Enter publication description">
+          </label>
+          <label class="flex">
+            <input type="checkbox" formControlName="isPublic" name="name" value="" />
+            <span class="ml-1">Make it public</span>
+          </label>
+          <input type="button" (click)="uploadPublicationSubmit()" class="btn-yellow w-100p mt-2" name="name" value="Create" />
+        </div>
+      </form>
+      <h1 class="mb-1">Gallery</h1>
+      <div *ngIf="gallery" class="content-center flex-wrap">
+        <div *ngFor="let item of gallery.images" class="popular-item bg-black mh-1 content-center-end col">
+          <img src="{{ item.imageUrl }}">
+          <div class="popular-shadow"></div>
+          <span class="popular-description mb-1">{{ item.description }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
