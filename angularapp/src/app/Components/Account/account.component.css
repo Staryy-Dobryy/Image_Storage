@@ -1,0 +1,16 @@
+.profile-img{
+   border-radius: 5%;
+   height: 50dvh;
+   max-width: 50dvh;
+}
+
+.file-upload-zone {
+  border: 5px dashed #838383;
+  border-radius: 15px;
+  background-color: #e5e5e5;
+}
+
+.file-upload-text {
+  font-size: 28px;
+  font-weight: 600;
+}

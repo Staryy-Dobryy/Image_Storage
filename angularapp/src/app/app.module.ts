@@ -12,11 +12,13 @@ import { GeneralComponent } from './Components/General/general.component';
 import { GalleryComponent } from './Components/Gallery/gallery.component';
 import { NavigationComponent } from './Components/Navigation/navigation.component';
 import { DragDirective } from './Directives/dragDropFile.directive';
+import { AccountComponent } from './Components/Account/account.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'general', component: GeneralComponent },
   { path: 'gallery', component: GalleryComponent },
+  { path: 'account', component: AccountComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -27,6 +29,7 @@ const appRoutes: Routes = [
     GeneralComponent,
     GalleryComponent,
     NotFoundComponent,
+    AccountComponent,
     InViewAnimationDirective,
     NavigationComponent,
     DragDirective
