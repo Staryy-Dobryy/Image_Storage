@@ -46,7 +46,7 @@
       <h1>Create new publication</h1>
       <form [formGroup]="uploadPublicationForm" class="flex row mw-1 w-100">
         <label class="w-50 h-50 mh-1 content-center" [class.file-upload-zone]="!imagePreview" [class.file-uploaded]="imagePreview" dragFile (file)="getDroppedFile($event)">
-          <img *ngIf="imagePreview" style=" height: inherit;" src="{{imagePreview}}" alt="Alternate Text" />
+          <img *ngIf="imagePreview" style="height: inherit;" src="{{imagePreview}}" alt="Alternate Text" />
           <span class="file-upload-text" *ngIf="!imagePreview">Drop your picture here</span>
           <input type="file" formControlName="image" style="display: none;" (change)="getDroppedFile($event)" accept="image/*" />
         </label>
@@ -64,7 +64,7 @@
       </form>
       <h1 class="mb-1">Gallery</h1>
       <div *ngIf="gallery" class="content-center flex-wrap">
-        <div *ngFor="let item of gallery.images" class="popular-item bg-black mh-1 content-center-end col">
+        <div *ngFor="let item of gallery" class="popular-item bg-black mh-1 content-center-end col" (click)="getPublication(item.id)">
           <img src="{{ item.imageUrl }}">
           <div class="popular-shadow"></div>
           <span class="popular-description mb-1">{{ item.description }}</span>

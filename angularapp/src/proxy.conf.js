@@ -5,7 +5,9 @@ const PROXY_CONFIG = [
       "/api/Login",
       "/api/Publication",
       "/api/General",
-      "/api/GoogleAuth"
+      "/api/Gallery",
+      "/api/GoogleAuth",
+      "/Images/"
     ],
     target: "https://localhost:7161",
     secure: false

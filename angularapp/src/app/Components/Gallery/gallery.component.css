@@ -65,6 +65,7 @@ input[type="checkbox"]:checked {
 
   .popular-item img {
     height: inherit;
+    max-width: 100%;
     position: absolute;
   }
 

@@ -194,6 +194,18 @@ body {
   width: 100%;
 }
 
+.w-75p {
+  width: 75%;
+}
+
+.w-50p {
+  width: 50%;
+}
+
+.w-25p {
+  width: 25%;
+}
+
 .w-100 {
   width: 100dvw;
 }
@@ -204,6 +216,10 @@ body {
 
 .w-50 {
   width: 50dvw;
+}
+
+.w-30 {
+  width: 30dvh;
 }
 
 .w-25 {

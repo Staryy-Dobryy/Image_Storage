@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { IGallery } from '../../Models/gallery.model';
 import { GalleryService } from '../../Services/gallery.service';
 import { IPublication } from '../../Models/publication.model';
 import { PublicationService } from '../../Services/publication.service';
+import { Router } from '@angular/router';
+import { IPreview } from '../../Models/preview.model';
 
 @Component({
   selector: 'app-gallery',
@@ -13,8 +14,8 @@ import { PublicationService } from '../../Services/publication.service';
 })
 export class GalleryComponent implements OnInit {
   publication: IPublication | undefined;
-  gallery: IGallery
-  imagePreview: string;
+  gallery: IPreview[] = []
+  imagePreview: string | undefined;
 
   uploadPublicationForm = new FormGroup({
     image: new FormControl<File | undefined>(undefined),
@@ -23,7 +24,7 @@ export class GalleryComponent implements OnInit {
   });
 
 
-  constructor(private galleryService: GalleryService, private publicationService: PublicationService) {
+  constructor(private galleryService: GalleryService, private publicationService: PublicationService, private router: Router) {
 
   }
 
@@ -32,10 +33,19 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.galleryService.getGeneral().subscribe(gallery => {
       this.gallery = gallery;
-    })
+    },
+      error => {
+      console.error("Gallery fail", error)
+
+      if (error.status == 401) {
+        localStorage.removeItem("jwt")
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   uploadPublicationSubmit(): void {
+
     const publicationImage = this.uploadPublicationForm["image"]
 
     const publicationDetails = {
@@ -47,12 +57,27 @@ export class GalleryComponent implements OnInit {
     formData.append('image', publicationImage, publicationImage.name);
 
 
-    this.publicationService.createPublication(formData, publicationDetails).subscribe(() => {
+    this.publicationService.createPublication(formData, publicationDetails).subscribe(preview => {
 
+
+      console.log(this.gallery)
+
+      this.gallery.push(preview);
+
+      console.log(this.gallery)
     },
       error => {
         console.error("Publication failed", error)
+
+        if (error.status == 401) {
+          localStorage.removeItem("jwt")
+          this.router.navigate(['/']);
+        }
       });
+
+    this.uploadPublicationForm.reset();
+    this.uploadPublicationForm["isPublic"] = false
+    this.imagePreview = undefined;
   }
 
   getDroppedFile(file: File | any): void {
@@ -75,5 +100,11 @@ export class GalleryComponent implements OnInit {
     catch (ex) {
       console.warn(ex)
     }
+  }
+
+  getPublication(id: string): void {
+    this.publicationService.getPublicationById(id).subscribe(publication => {
+      this.publication = publication;
+    });
   }
 }

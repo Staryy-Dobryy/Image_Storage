@@ -8,6 +8,7 @@
 
 .popular-item img {
   height: inherit;
+  max-width: 100%;
   position: absolute;
 }
 
@@ -45,6 +46,7 @@
 
 .interesting-item img {
   height: inherit;
+  max-width: 100%;
   position: absolute;
 }
 
