@@ -16,6 +16,13 @@ namespace ImageStorage.DAL.Repositories.Realization
         {
         }
 
+        public async Task<IEnumerable<Publication>> GetAllBuUserIdAsync(Guid userId)
+        {
+            return await _dbContext.Set<Publication>()
+                .Where(x => x.AuthorId == userId)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Comment>?> GetCommentsByPublicationIdAsync(Guid publicationId)
         {
             var publication = await _dbContext.Set<Publication>()
@@ -36,12 +43,12 @@ namespace ImageStorage.DAL.Repositories.Realization
                 .Where(x => x.IsPublic)
                 .AverageAsync(x => x.ViewsCount);
 
-            return _dbContext.Set<Publication>()
-                .Where(x => x.ViewsCount > average)
+            return await _dbContext.Set<Publication>()
+                .Where(x => x.ViewsCount >= average)
                 .OrderBy(x => x.ViewsCount)
                 .Skip(skip)
                 .Take(take)
-                .ToList();
+                .ToListAsync();
         }
 
         public async Task<Publication?> GetWithDetailsByIdAsync(Guid publicationId)

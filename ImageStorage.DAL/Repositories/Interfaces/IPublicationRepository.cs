@@ -12,5 +12,6 @@ namespace ImageStorage.DAL.Repositories.Interfaces
         Task<Publication?> GetWithDetailsByIdAsync(Guid publicationId);
         Task<IEnumerable<Comment>?> GetCommentsByPublicationIdAsync(Guid publicationId);
         Task<IEnumerable<Publication>> GetPopularPublicationsAsync(int take, int skip);
+        Task<IEnumerable<Publication>> GetAllBuUserIdAsync(Guid userId);
     }
 }
