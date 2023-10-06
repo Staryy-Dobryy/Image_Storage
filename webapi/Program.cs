@@ -1,6 +1,8 @@
 using ImageStorage.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
+using Sailora.Identity.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = builder.Configuration;
@@ -21,6 +23,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();
+
+app.UseMiddleware<JwtMiddleware>();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.Services.UseDatabase();

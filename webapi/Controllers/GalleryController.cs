@@ -1,34 +1,31 @@
 ﻿using ImageStorage.Api.Attributes;
 using ImageStorage.BLL.Models;
+using ImageStorage.BLL.Models.CreateModels;
 using ImageStorage.BLL.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace webapi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GeneralController : ControllerBase
+    public class GalleryController : ControllerBase
     {
         private readonly IPublicationService _publicationService;
 
-        public GeneralController(IPublicationService publicationService)
+        public GalleryController(IPublicationService publicationService)
         {
             _publicationService = publicationService;
         }
 
         [HttpGet]
-
+        [Authorize]
         public async Task<IActionResult> Get()
         {
+            var jwtUser = (JwtUserModel)HttpContext.Items["jwtUserModel"];
 
-            var popularPreviews = await _publicationService.GetPublicationsPreviews(3, 0);
-            var interestingPreviews = await _publicationService.GetPublicationsPreviews(12, 0);
-
-            var result = new
-            {
-                popular = popularPreviews,
-                interesting = interestingPreviews
-            };
+            var result = await _publicationService.GetUserGalleryAsync(jwtUser);
 
             return new JsonResult(result);
         }
