@@ -9,7 +9,7 @@ namespace ImageStorage.BLL.Models
     public class PublicationModel
     {
         public string Id { get; set; }
-        public string Discription { get; set; }
+        public string Description { get; set; }
         public string ImageUrl { get; set; }
         public int Views { get; set; }
         public UserModel Author { get; set; }

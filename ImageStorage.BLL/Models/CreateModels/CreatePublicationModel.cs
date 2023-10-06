@@ -8,6 +8,7 @@ namespace ImageStorage.BLL.Models.CreateModels
 {
     public class CreatePublicationModel
     {
+        public Guid Id { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public bool IsPublic { get; set; }
