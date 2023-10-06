@@ -17,12 +17,17 @@ namespace ImageStorage.BLL.Mapping
 
             destination.Email = source.Email;
             destination.Password = source.Password;
+
+            // UserId for relation
+            destination.UserId = Guid.NewGuid();
             destination.User = new()
             {
+                // Id for relation
+                Id = (Guid)destination.UserId,
                 Email = source.Email,
                 Name = source.Name,
                 GoogleAuth = false,
-                ImageUrl = "/default-image.png"
+                ImageUrl = "/Images/baseUserImg.png"
             };
 
             return destination;

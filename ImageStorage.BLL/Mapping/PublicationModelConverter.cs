@@ -16,7 +16,7 @@ namespace ImageStorage.BLL.Mapping
             if (destination is null) destination = new PublicationModel();
 
             destination.Id = source.Id.ToString();
-            destination.Discription = source.Description;
+            destination.Description = source.Description;
             destination.ImageUrl = source.ImageUrl;
             destination.Views = source.ViewsCount;
             destination.Author = context.Mapper.Map<UserModel>(source.Author);
