@@ -1,24 +1,85 @@
+<!--Current post window-->
+<div *ngIf="publication" class="content-center full-screan publication">
+  <div (click)="publication = undefined" class="alert-bg"></div>
+  <div class="alert bg-white ph-3 pw-3 flex row w-75 h-75">
+    <div class="w-100 h-75 content-center col">
+      <img src="{{ publication.imageUrl }}" style=" height: auto; max-width: 100%; max-height: 100%;">
+    </div>
+    <div class="w-100p ph-1">
+      <div class="content-center col flex-start">
+        <h4>{{ publication.views }} views</h4>
+        <h3 class="mw-2">{{ publication.description }}</h3>
+        <div class="flex">
+          <div class="content-center">
+            <a href="{{ publication.imageUrl }}" download class="btn-yellow mr-1">Download .PNG</a>
+            <h4>Author:</h4>
+            <p class="link-dark mh-1" (click)="showUserProfile(publication.author.id)">{{ publication.author.userName }}</p>
+            <img src="{{ publication.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
+          </div>
+        </div>
+      </div>
+      <hr class="mw-2">
+      <div class="flex col">
+        <form *ngId="authorized" [formGroup]="createCommentForm">
+          <input type="text" formControlName="text" class="text-input w-50p mh-1" placeholder="Rate this publication">
+          <input type="button" (click)="createComment()" class="btn-yellow w-25p mh-1" value="Send">
+        </form>
+        <span class="mw-1">Comments</span>
+        <div class="mt-2 comments">
+          <div class="content-center-start flex-wrap">
+
+            <!--Comment message template-->
+            <div *ngFor="let comment of publication.comments" class="content-center-start w-100p row">
+              <img src="{{ comment.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
+              <h4 class="mh-1">{{ comment.author.userName }}:</h4>
+              <p style="text-align: left">{{ comment.text }}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Current post window end-->
+
 <div class="add-scroll full-screan">
   <app-navigation></app-navigation>
   <div class="content-center col pw-3 mt-3">
-    <div *ngIf="!changeProfileMenuEnabled" class="mt-3">
-      <img src="assets/tempimg.png" class="profile-img">
-      <h1 class="mw-2">Username</h1>
-      <button class="btn-yellow w-25" (click)="profileMenuHandler()">Change</button>
+    <div *ngIf="accountId && user">
+      <img src="{{ user.imageUrl }}" class="profile-img">
+      <h1 class="mw-2">{{ user.userName }}</h1>
+      <h3 class="mw-2">Public gallery</h3>
+      <div *ngIf="gallery" class="content-center flex-wrap">
+        <div *ngFor="let item of gallery" class="popular-item bg-black mh-1 content-center-end col" (click)="getPublication(item.id)">
+          <img src="{{ item.imageUrl }}">
+          <div class="popular-shadow"></div>
+          <span class="popular-description mb-1">{{ item.description }}</span>
+        </div>
+      </div>
     </div>
-    <form [formGroup]="updateProfileForm" *ngIf="changeProfileMenuEnabled" class="mt-3">
-      <label class="profile-img content-center" [class.file-upload-zone]="!imagePreview" dragFile (file)="getDroppedFile($event)">
-        <img *ngIf="imagePreview" class="profile-img" src="{{imagePreview}}" />
-        <span *ngIf="!imagePreview" class="file-upload-text">Choise your picture</span>
-        <input type="file" formControlName="image" (change)="getDroppedFile($event)" style="display: none;" accept="image/*" />
-      </label>
-      <div>
-        <input type="text" formControlName="username" class="text-input w-25 mw-2" placeholder="Enter your new username" />
+    <div *ngIf="!accountId">
+      <div *ngIf="!changeProfileMenuEnabled && user" class="mt-3">
+        <img src="{{ user.imageUrl }}" class="profile-img">
+        <h1 class="mw-2">{{ user.userName }}</h1>
+        <button class="btn-yellow w-25" (click)="profileMenuHandler()">Change</button>
+        <h3 class="mw-1">or</h3>
+        <button class="btn-white w-25" (click)="logout()">Logout</button>
       </div>
-      <div class="w-50">
-        <input type="button" class="btn-white mh-1 w-25p" (click)="profileMenuHandler()" value="Cancel">
-        <input type="button" class="btn-yellow mh-1 w-25p" (click)="updateProfileSubmit()" value="Save changes">
-      </div>
-    </form>
+      <form [formGroup]="updateProfileForm" *ngIf="changeProfileMenuEnabled" class="mt-3">
+        <label class="profile-img content-center" [class.file-upload-zone]="!imagePreview" dragFile (file)="getDroppedFile($event)">
+          <img *ngIf="imagePreview" class="profile-img" src="{{imagePreview}}" />
+          <span *ngIf="!imagePreview" class="file-upload-text">Choise your picture</span>
+          <input type="file" formControlName="image" (change)="getDroppedFile($event)" style="display: none;" accept="image/*" />
+        </label>
+        <div>
+          <input type="text" formControlName="username" class="text-input w-25 mw-2" placeholder="Enter your new username" />
+        </div>
+        <div class="w-50">
+          <input type="button" class="btn-white mh-1 w-25p" (click)="profileMenuHandler()" value="Cancel">
+          <input type="button" class="btn-yellow mh-1 w-25p" (click)="updateProfileSubmit()" value="Save changes">
+        </div>
+      </form>
+    </div>
   </div>
 </div>

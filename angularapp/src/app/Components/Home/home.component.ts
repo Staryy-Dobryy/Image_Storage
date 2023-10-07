@@ -157,6 +157,11 @@ export class HomeComponent implements OnInit {
           this.currentScrollTarget = 1
           this.scrollTargets[1]!.nativeElement.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
           break;
+        case "top":
+          this.startAnimation();
+          this.currentScrollTarget = 0
+          this.scrollTargets[0]!.nativeElement.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+          break;
       }
     }
   }

@@ -13,19 +13,23 @@
           <div class="content-center">
             <a href="{{ publication.imageUrl }}" download class="btn-yellow mr-1">Download .PNG</a>
             <h4>Author:</h4>
-            <p class="link-dark mh-1">{{ publication.author.userName }}</p>
+            <p class="link-dark mh-1" (click)="showUserProfile(publication.author.id)">{{ publication.author.userName }}</p>
             <img src="{{ publication.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
           </div>
         </div>
       </div>
       <hr class="mw-2">
-      <div>
-        <span>Comments</span>
+      <div class="flex col">
+        <form *ngId="authorized" [formGroup]="createCommentForm">
+          <input type="text" formControlName="text" class="text-input w-50p mh-1" placeholder="Rate this publication">
+          <input type="button" (click)="createComment()" class="btn-yellow w-25p mh-1" value="Send">
+        </form>
+        <span class="mw-1">Comments</span>
         <div class="mt-2 comments">
           <div class="content-center-start flex-wrap">
 
             <!--Comment message template-->
-            <div *ngFor="let comment on publication.comments" class="content-center-start w-100p row">
+            <div *ngFor="let comment of publication.comments" class="content-center-start w-100p row">
               <img src="{{ comment.author.imageUrl }}" style="height: 50px; width: 50px; border-radius: 100%;">
               <h4 class="mh-1">{{ comment.author.userName }}:</h4>
               <p style="text-align: left">{{ comment.text }}</p>

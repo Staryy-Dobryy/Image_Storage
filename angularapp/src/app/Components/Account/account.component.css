@@ -14,3 +14,43 @@
   font-size: 28px;
   font-weight: 600;
 }
+
+
+/*Publication preview styles*/
+.popular-item {
+  height: 315px;
+  width: 560px;
+  border-radius: 10px;
+  position: relative;
+  margin-inline: 1dvw;
+}
+
+.popular-item img {
+  height: inherit;
+  max-width: 100%;
+  position: absolute;
+}
+
+.popular-item > .popular-description {
+  opacity: 0;
+  transition: 0.1s;
+  position: absolute;
+  font-weight: 600;
+}
+
+.popular-shadow {
+  height: inherit;
+  width: inherit;
+  position: absolute;
+  border-radius: inherit;
+  transition: 0.2s;
+}
+
+.popular-item:hover > .popular-shadow {
+  box-shadow: inset 0 -80px 60px -30px #ffffffc5;
+  background-color: #00000056;
+}
+
+.popular-item:hover .popular-description {
+  opacity: 1;
+}

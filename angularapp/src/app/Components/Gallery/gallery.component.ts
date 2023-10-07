@@ -14,6 +14,8 @@ import { IPreview } from '../../Models/preview.model';
 })
 export class GalleryComponent implements OnInit {
   publication: IPublication | undefined;
+  publicationId: string;
+
   gallery: IPreview[] = []
   imagePreview: string | undefined;
 
@@ -23,6 +25,10 @@ export class GalleryComponent implements OnInit {
     isPublic: new FormControl<boolean>(false)
   });
 
+  authorized: boolean = false;
+  createCommentForm = new FormGroup({
+    text: new FormControl<string>(''),
+  });
 
   constructor(private galleryService: GalleryService, private publicationService: PublicationService, private router: Router) {
 
@@ -31,7 +37,11 @@ export class GalleryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.galleryService.getGeneral().subscribe(gallery => {
+    if (localStorage.getItem("jwt")) {
+      this.authorized = true
+    }
+
+    this.galleryService.getGallery().subscribe(gallery => {
       this.gallery = gallery;
     },
       error => {
@@ -106,5 +116,22 @@ export class GalleryComponent implements OnInit {
     this.publicationService.getPublicationById(id).subscribe(publication => {
       this.publication = publication;
     });
+  }
+
+  showUserProfile(userId: string): void {
+    this.router.navigate(["/account"], { queryParams: { "accountId": userId } })
+  }
+
+  createComment(): void {
+    const commentDetails = {
+      text: this.createCommentForm.get("text")!.value!,
+      publicationId: this.publicationId
+    }
+
+    this.publicationService.createCommentOnPublication(commentDetails).subscribe(comment => {
+      this.publication?.comments.push(comment)
+    });
+
+    this.createCommentForm.reset();
   }
 }

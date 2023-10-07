@@ -79,7 +79,7 @@
     <p class="slide-info">Image storage is a web service for loading and saving images on the Internet. Also comment and admire the images of other users from around the world!</p>
   </div>
   <div class="w-100">
-    <img src="assets/tempimg.png">
+    <img src="assets/preview.jpg">
   </div>
 </div>
 <div #about class="full-screan bg-yellow content-center border-0 col" id="about">
@@ -88,29 +88,6 @@
 </div>
 <div #bottom class="full-screan content-center border-0 row">
   <div class="w-100 ph-3 mh-3">
-    <p inViewAnimation animationClassName="slide-in-left-anim" class="opacity-0 slide-name-strong">Ready to join</p>
-  </div>
-  <div class="w-100">
-    <div class="bg-white ph-3 pw-3 flex col w-25">
-      <h1 class="mw-3">Registration</h1>
-      <div class="content-center col">
-        <label class="form-group">
-          <span class="ml-1 mw-1">Username</span>
-          <input type="email" class="text-input mb-1" placeholder="Enter your username">
-        </label>
-        <label class="form-group">
-          <span class="ml-1 mw-1">E-mail address</span>
-          <input type="email" class="text-input mb-1" placeholder="Enter your email">
-        </label>
-        <label class="form-group">
-          <span class="ml-1 mw-1">Password</span>
-          <input type="email" class="text-input mb-1" placeholder="Create password">
-        </label>
-        <button class="btn-yellow w-100p">Join to Comunity</button>
-        <h4 class="mw-2">or</h4>
-        <button type="button" class="login-with-google-btn btn-white w-100p mb-1" #loginRef>Sign in with Google</button>
-        <p class="mb-3">If you have an account - <span (click)="openLoginForm()" class="link-dark">Login</span></p>
-      </div>
-    </div>
+    <p (click)="scrollToElement('top')" inViewAnimation animationClassName="slide-in-left-anim" class="opacity-0 slide-name-strong link-dark">Ready to join?</p>
   </div>
 </div>
