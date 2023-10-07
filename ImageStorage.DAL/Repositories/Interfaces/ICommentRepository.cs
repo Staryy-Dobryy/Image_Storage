@@ -9,5 +9,6 @@ namespace ImageStorage.DAL.Repositories.Interfaces
 {
     public interface ICommentRepository : IBaseRepository<Comment>
     {
+        Task<Comment> AddAndReturnWithDetailsAsync(Comment comment);
     }
 }
