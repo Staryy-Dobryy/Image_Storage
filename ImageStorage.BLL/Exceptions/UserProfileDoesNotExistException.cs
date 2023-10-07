@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ImageStorage.BLL.Exceptions
 {
-    public class UserProfileDoesNotExistExcaption : Exception
+    public class UserProfileDoesNotExistException : Exception
     {
-        public UserProfileDoesNotExistExcaption() : base("This user profile does not exist") { }
+        public UserProfileDoesNotExistException() : base("This user profile does not exist") { }
     }
 }

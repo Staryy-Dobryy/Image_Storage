@@ -34,7 +34,7 @@ namespace ImageStorage.BLL.Services.Realization
 
             if (user is null)
             {
-                throw new UserProfileDoesNotExistExcaption();
+                throw new UserProfileDoesNotExistException();
             }
 
             return _mapper.Map<UserModel>(user);

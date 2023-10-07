@@ -22,7 +22,7 @@ namespace webapi.Controllers
         {
 
             var popularPreviews = await _publicationService.GetPublicationsPreviews(3, 0);
-            var interestingPreviews = await _publicationService.GetPublicationsPreviews(12, 0);
+            var interestingPreviews = await _publicationService.GetPublicationsPreviews(12, 3);
 
             var result = new
             {

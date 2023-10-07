@@ -26,7 +26,8 @@ public class ExceptionHandlerMiddleware
                 exType == typeof(AccountAlreadyExistsException) ||
                 exType == typeof(AccountDoesNotExistException) ||
                 exType == typeof(AccountLoginFailedException) ||
-                exType == typeof(AccountUsesGoogleAuthException):
+                exType == typeof(AccountUsesGoogleAuthException) ||
+                exType == typeof(UserProfileDoesNotExistException):
 
                     context.Response.StatusCode = 400;
                     await context.Response.WriteAsync(ex.Message);

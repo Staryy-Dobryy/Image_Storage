@@ -14,17 +14,28 @@ namespace webapi.Controllers
     {
         private readonly IWebHostEnvironment _appEnvironment;
         private readonly IPublicationService _publicationService;
+        private readonly IViewService _viewService;
 
-        public PublicationController(IWebHostEnvironment appEnvironment, IPublicationService publicationService)
+        public PublicationController(IWebHostEnvironment appEnvironment, IPublicationService publicationService, IViewService viewService)
         {
             _appEnvironment = appEnvironment;
             _publicationService = publicationService;
+            _viewService = viewService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get(string publicationId)
         {
-            var result = await _publicationService.GetPublicationById(Guid.Parse(publicationId));
+            Guid publicationGuid = Guid.Parse(publicationId);
+
+            var result = await _publicationService.GetPublicationById(publicationGuid);
+
+            var jwtUser = (JwtUserModel)HttpContext.Items["jwtUserModel"];
+
+            if (jwtUser is not null)
+            {
+                await _viewService.CreateViewOnPublication(publicationGuid, jwtUser);
+            }
 
             return new JsonResult(result);
         }
