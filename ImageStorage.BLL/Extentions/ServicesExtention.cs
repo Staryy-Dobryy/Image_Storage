@@ -25,7 +25,7 @@ namespace ImageStorage.Extentions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IViewService, ViewService>();
             services.AddSingleton<HashTool>();
-            services.AddSingleton<SaveImageTool>();
+            services.AddSingleton<ImageHandlerTool>();
         }
     }
 }
