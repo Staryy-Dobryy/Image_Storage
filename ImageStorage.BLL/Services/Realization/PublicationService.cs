@@ -20,9 +20,9 @@ namespace ImageStorage.BLL.Services.Realization
     {
         private readonly IPublicationRepository _publicationRepository;
         private readonly IMapper _mapper;
-        private readonly SaveImageTool _saveImageTool;
+        private readonly ImageHandlerTool _saveImageTool;
 
-        public PublicationService(IPublicationRepository publicationRepository, IMapper mapper, SaveImageTool saveImageTool)
+        public PublicationService(IPublicationRepository publicationRepository, IMapper mapper, ImageHandlerTool saveImageTool)
         {
             _publicationRepository = publicationRepository;
             _mapper = mapper;
@@ -73,7 +73,7 @@ namespace ImageStorage.BLL.Services.Realization
 
         public async Task<List<PreviewModel>> GetUserGalleryAsync(JwtUserModel jwtUser)
         {
-            var publicationsList = await _publicationRepository.GetAllBuUserIdAsync(jwtUser.Id);
+            var publicationsList = await _publicationRepository.GetAllByUserIdAsync(jwtUser.Id);
 
             return _mapper.Map<List<PreviewModel>>(publicationsList);
         }
@@ -83,6 +83,13 @@ namespace ImageStorage.BLL.Services.Realization
             var publication = await _publicationRepository.GetWithDetailsByIdAsync(publicationId);
 
             return _mapper.Map<PublicationModel>(publication);
+        }
+
+        public async Task<List<PreviewModel>> GetUserPublicGalleryAsync(Guid userId)
+        {
+            var publicationsList = await _publicationRepository.GetAllByUserIdAsync(userId, true);
+
+            return _mapper.Map<List<PreviewModel>>(publicationsList);
         }
     }
 }

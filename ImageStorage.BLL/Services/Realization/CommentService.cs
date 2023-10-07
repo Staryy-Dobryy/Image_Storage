@@ -23,6 +23,17 @@ namespace ImageStorage.BLL.Services.Realization
             _mapper = mapper;
         }
 
+        public async Task<CommentModel> CreateAndReturnCommentAsync(CreateCommentModel source, JwtUserModel jwtUser)
+        {
+            var entity = _mapper.Map<Comment>(source);
+            entity.AuthorId = jwtUser.Id;
+            entity.CreationTime = DateTime.Now;
+
+            var comment = await _commentRepository.AddAndReturnWithDetailsAsync(entity);
+
+            return _mapper.Map<CommentModel>(comment);
+        }
+
         public async Task CreateCommentAsync(CreateCommentModel source, JwtUserModel jwtUser)
         {
             var comment = _mapper.Map<Comment>(source);

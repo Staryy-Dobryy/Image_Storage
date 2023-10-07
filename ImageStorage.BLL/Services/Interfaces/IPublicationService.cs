@@ -13,6 +13,7 @@ namespace ImageStorage.BLL.Services.Interfaces
     public interface IPublicationService
     {
         Task<List<PreviewModel>> GetUserGalleryAsync(JwtUserModel jwtUser);
+        Task<List<PreviewModel>> GetUserPublicGalleryAsync(Guid userId);
         Task<List<PreviewModel>> GetPublicationsPreviews(int take, int skip);
         Task<PublicationModel> GetPublicationById(Guid publicationId);
         Task<PreviewModel> CreateAndReturnPublicationAsync(CreatePublicationModel source, JwtUserModel jwtUser, IFormFile image, string webRootPath);

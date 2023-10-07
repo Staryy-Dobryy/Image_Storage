@@ -11,6 +11,7 @@ namespace ImageStorage.BLL.Services.Interfaces
     public interface ICommentService
     {
         Task CreateCommentAsync(CreateCommentModel source, JwtUserModel jwtUser);
+        Task<CommentModel> CreateAndReturnCommentAsync(CreateCommentModel source, JwtUserModel jwtUser);
         Task DeleteCommentAsync(Guid id);
     }
 }
