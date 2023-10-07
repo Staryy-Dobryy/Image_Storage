@@ -6,10 +6,7 @@ namespace ImageStorage.DAL.Context
 {
     public class ImageSrorageDbContext : DbContext
     {
-        public ImageSrorageDbContext() { }
-
-        public ImageSrorageDbContext(DbContextOptions options) : base(options) { }
-
+        public ImageSrorageDbContext(DbContextOptions<ImageSrorageDbContext> options) : base(options) { }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Publication> Publications { get; set; }
